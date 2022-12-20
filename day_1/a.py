@@ -4,7 +4,7 @@ from helpers import get_day_and_part
 
 day, part = get_day_and_part(__file__)
 
-puzzle = Puzzle(year=2022, day=13)
+puzzle = Puzzle(year=2022, day=day)
 data = puzzle.input_data
 
 print(data)
