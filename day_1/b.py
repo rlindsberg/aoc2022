@@ -12,8 +12,8 @@ def main():
 
     sorted_calorie_dict = sum_calories_for_each_elf(data)
 
-    largest_calories_list = list(sorted_calorie_dict.values())[-3:]
-    sum_largest_three_elves = sum(largest_calories_list)
+    largest_calories_list = list(sorted_calorie_dict.values())
+    sum_largest_three_elves = sum(largest_calories_list[-3:])
 
     submit_answer(sum_largest_three_elves, day, part)
 
