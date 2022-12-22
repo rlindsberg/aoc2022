@@ -64,13 +64,13 @@ class Me:
         elif self.facing == Facing.EAST:
             next_x = self.position[0]
             for j in range(self.max_y):
-                if (j, next_x) in self.map_:
+                if (next_x, j) in self.map_:
                     next_y = j
                     return next_x, next_y
         else:
             next_x = self.position[0]
             for j in reversed(range(self.max_y)):
-                if (j, next_x) in self.map_:
+                if (next_x, j) in self.map_:
                     next_y = j
                     return next_x, next_y
 
