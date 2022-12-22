@@ -10,15 +10,21 @@ my_map = {}
 
 def draw_map(data):
     input_list = data.split("\n")
+    max_x = 0,
+    max_y = 0
+
     for idx, row in enumerate(input_list):
         # reached the end
         if row == '':
             instruction = input_list[-1]
-            return instruction
+            max_x = idx + 1
+            return instruction, max_x, max_y
 
         row_idx = idx + 1
         for idx2, element in enumerate(row):
             column_idx = idx2 + 1
+            if column_idx > max_y:
+                max_y = column_idx
 
             # empty
             if element == ' ':
@@ -28,9 +34,6 @@ def draw_map(data):
             elif element == '#':
                 my_map[(row_idx, column_idx)] = SquareType.WALL
 
-        print(row)
-
-    return None
 
 
 def main():
@@ -40,8 +43,8 @@ def main():
     data = puzzle.input_data
 
     # solution
-    instruction = draw_map(data)
-    me = Me(my_map)
+    instruction, max_x, max_y = draw_map(data)
+    me = Me(my_map, max_x, max_y)
     me.move_by_instructions(instruction)
     ans = 0
 
