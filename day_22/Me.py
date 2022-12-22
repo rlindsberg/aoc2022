@@ -25,7 +25,19 @@ class Me:
                 return k[0], k[1]
 
     def move_by_instructions(self, instr_str):
-        instr_list = re.findall(r'[A-Za-z]+|\d+', instr_str)
+        split_list = re.findall(r'[A-Za-z]+|\d+', instr_str)
+
+        # replace multiple letters with list
+        instr_list = []
+        for instr in split_list:
+            # multiple letters
+            if (not instr.isdigit()) and len(instr) > 1:
+                for letter in instr:
+                    instr_list.append(letter)
+            else:
+                # single letter or number
+                instr_list.append(instr)
+
 
         for inst in instr_list:
             print(inst)
@@ -56,28 +68,59 @@ class Me:
             next_y = self.position[1]
             for i in reversed(range(self.max_x)):
                 if (i, next_y) in self.map_:
-                    next_x = i
-                    return next_x, next_y
+
+                    # a wall, stay
+                    if self.map_[(i, next_y)] == SquareType.WALL:
+                        return self.position[0], self.position[1]
+
+                    # empty space, try next one
+                    elif self.map_[(i, next_y)] == SquareType.EMPTY:
+                        continue
+
+                    # tile, teleport there
+                    else:
+                        next_x = i
+                        return next_x, next_y
 
         elif self.facing == Facing.SOUTH:
             next_y = self.position[1]
             for i in range(self.max_x):
                 if (i, next_y) in self.map_:
-                    next_x = i
-                    return next_x, next_y
+                    # a wall, stay
+                    if self.map_[(i, next_y)] == SquareType.WALL:
+                        return self.position[0], self.position[1]
+
+                    # empty space, try next one
+                    elif self.map_[(i, next_y)] == SquareType.EMPTY:
+                        continue
+
+                    # tile, teleport there
+                    else:
+                        next_x = i
+                        return next_x, next_y
 
         elif self.facing == Facing.EAST:
             next_x = self.position[0]
             for j in range(self.max_y):
                 if (next_x, j) in self.map_:
-                    next_y = j
-                    return next_x, next_y
+                    if self.map_[(next_x, j)] == SquareType.WALL:
+                        return self.position[0], self.position[1]
+                    elif self.map_[(next_x, j)] == SquareType.EMPTY:
+                        continue
+                    else:
+                        next_y = j
+                        return next_x, next_y
         else:
             next_x = self.position[0]
             for j in reversed(range(self.max_y)):
                 if (next_x, j) in self.map_:
-                    next_y = j
-                    return next_x, next_y
+                    if self.map_[(next_x, j)] == SquareType.WALL:
+                        return self.position[0], self.position[1]
+                    elif self.map_[(next_x, j)] == SquareType.EMPTY:
+                        continue
+                    else:
+                        next_y = j
+                        return next_x, next_y
 
         # return
         # if self.map_[(next_x, next_y)] == SquareType.WALL:

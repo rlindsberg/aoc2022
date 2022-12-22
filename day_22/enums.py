@@ -60,7 +60,8 @@ def check_boundary(func):
 
         # wrap around if this fails (raise exception)
         try:
-            ok = map_[(try_next_position[0], try_next_position[1])]
+            if map_[(try_next_position[0], try_next_position[1])] == SquareType.EMPTY:
+                raise ValueError('Out of map exception')
         except KeyError:
             raise ValueError('Out of map exception')
 
