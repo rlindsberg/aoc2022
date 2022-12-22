@@ -46,6 +46,34 @@ class Me:
             else:
                 self.move(int(inst))
 
+    def compute_wrap_around_x_y(self):
+        if self.facing == Facing.NORTH:
+            next_y = self.position[1]
+            for i in reversed(range(self.max_x)):
+                if (i, next_y) in self.map_:
+                    next_x = i
+                    return next_x, next_y
+
+        elif self.facing == Facing.SOUTH:
+            next_y = self.position[1]
+            for i in range(self.max_x):
+                if (i, next_y) in self.map_:
+                    next_x = i
+                    return next_x, next_y
+
+        elif self.facing == Facing.EAST:
+            next_x = self.position[0]
+            for j in range(self.max_y):
+                if (j, next_x) in self.map_:
+                    next_y = j
+                    return next_x, next_y
+        else:
+            next_x = self.position[0]
+            for j in reversed(range(self.max_y)):
+                if (j, next_x) in self.map_:
+                    next_y = j
+                    return next_x, next_y
+
     @check_boundary
     def move_one_step(self):
         # will check boundary before moving
@@ -58,4 +86,5 @@ class Me:
             except ValueError:
                 # do wrap around
                 print(self.map_)
-        pass
+                next_x, next_y = self.compute_wrap_around_x_y()
+                self.position = np.array([next_x, next_y])
