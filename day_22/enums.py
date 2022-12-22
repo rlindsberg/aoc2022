@@ -58,18 +58,20 @@ def check_boundary(func):
 
         try_next_position = current_position + facing_to_np_map[current_facing]
 
+        # wrap around if this fails (raise exception)
+        try:
+            ok = map_[(try_next_position[0], try_next_position[1])]
+        except KeyError:
+            raise ValueError('Out of map exception')
+
+        # wall
+        if map_[(try_next_position[0], try_next_position[1])] == SquareType.WALL:
+            print('cannot move into wall')
+            return
+
         # ok
         if 1 <= try_next_position[0] <= max_coordinate_x and 1 <= try_next_position[1] <= max_coordinate_y:
             # do move one step
             func(*args, **kwargs)
-        # wrap around
-        elif try_next_position[0] > max_coordinate_x or try_next_position[0] <= 0 or \
-                try_next_position[1] > max_coordinate_y or try_next_position[1] <= 0:
-            raise ValueError('Out of map exception')
-
-        # wall
-        elif map_[(try_next_position[0], try_next_position[1])] == SquareType.WALL:
-            print('cannot move into wall')
-            return
 
     return my_wrapper

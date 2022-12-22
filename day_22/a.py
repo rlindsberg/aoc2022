@@ -36,8 +36,8 @@ def draw_map(data):
 
 
 def compute_score(position_list, facing) -> int:
-    x = position_list[0]
-    y = position_list[1]
+    x = int(position_list[0])
+    y = int(position_list[1])
     facing_value = facing.value
 
     # The final password is the sum of 1000 times the row, 4 times the column, and the facing.
@@ -51,6 +51,7 @@ def main():
 
     puzzle = Puzzle(year=2022, day=day)
     data = puzzle.input_data
+    print(data)
 
     # solution
     instruction, max_x, max_y = draw_map(data)

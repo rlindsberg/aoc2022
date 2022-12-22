@@ -1,3 +1,5 @@
+import re
+
 import numpy as np
 
 from day_22.enums import Facing, SquareType, get_key_facing_to_np_map, check_boundary, facing_to_np_map
@@ -23,7 +25,9 @@ class Me:
                 return k[0], k[1]
 
     def move_by_instructions(self, instr_str):
-        for inst in instr_str:
+        instr_list = re.findall(r'[A-Za-z]+|\d+', instr_str)
+
+        for inst in instr_list:
             print(inst)
             if inst == 'R':
                 # if self.facing == Facing.EAST:
@@ -46,7 +50,8 @@ class Me:
             else:
                 self.move(int(inst))
 
-    def compute_wrap_around_x_y(self):
+    def compute_wrap_around_x_y(self) -> (int, int):
+        # next_x, next_y = self.position[0], self.position[1]
         if self.facing == Facing.NORTH:
             next_y = self.position[1]
             for i in reversed(range(self.max_x)):
@@ -73,6 +78,11 @@ class Me:
                 if (next_x, j) in self.map_:
                     next_y = j
                     return next_x, next_y
+
+        # return
+        # if self.map_[(next_x, next_y)] == SquareType.WALL:
+        #     return self.position
+        # return next_x, next_y
 
     @check_boundary
     def move_one_step(self):
