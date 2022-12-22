@@ -1,7 +1,6 @@
 import numpy as np
 
-from enums import Facing, SquareType
-from helpers import check_boundary, facing_to_np_map, get_key_facing_to_np_map
+from day_22.enums import Facing, SquareType, get_key_facing_to_np_map, check_boundary, facing_to_np_map
 
 _left_90_np = np.array([0, -1, 1, 0]).reshape(2, 2)
 _right_90_np = np.array([0, 1, -1, 0]).reshape(2, 2)

@@ -3,7 +3,7 @@ from aocd.models import Puzzle
 from day_22.Me import Me
 from helpers import get_day_and_part, submit_answer
 
-from enums import Facing, SquareType
+from day_22.enums import SquareType
 
 my_map = {}
 
