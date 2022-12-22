@@ -44,14 +44,17 @@ class Me:
                 self.facing = get_key_facing_to_np_map(next_facing_np)
 
             else:
-                self.move_step(int(inst))
+                self.move(int(inst))
 
     @check_boundary
-    def move_step(self, n_steps):
+    def move_one_step(self):
+        # will check boundary before moving
+        self.position += facing_to_np_map[self.facing]
+
+    def move(self, n_steps):
         for i in range(n_steps):
             try:
-                # will check boundary before moving
-                self.position += facing_to_np_map[self.facing]
+                self.move_one_step()
             except ValueError:
                 # do wrap around
                 print(self.map_)

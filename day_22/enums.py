@@ -40,7 +40,6 @@ def check_boundary(func):
     """
     This decorator function makes sure that the player does not run into wall, or into empty space
     """
-
     # this preserves the function identity of func.
     @functools.wraps(func)
     def my_wrapper(*args, **kwargs):
@@ -57,13 +56,14 @@ def check_boundary(func):
         if 1 <= try_next_position[0] <= max_coordinate_x and 1 <= try_next_position[1] <= max_coordinate_y:
             # do move one step
             func(*args, **kwargs)
+        # wrap around
+        elif try_next_position[0] > max_coordinate_x or try_next_position[0] <= 0 or \
+                try_next_position[1] > max_coordinate_y or try_next_position[1] <= 0:
+            raise ValueError('Out of map exception')
+
         # wall
         elif map_[(try_next_position[0], try_next_position[1])] == SquareType.WALL:
             print('cannot move into wall')
             return
-
-        # wrap around
-        else:
-            raise ValueError('Out of map exception')
 
     return my_wrapper
