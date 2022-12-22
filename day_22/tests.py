@@ -1,7 +1,8 @@
 import unittest
 
-from day_22.Me import Me
-from day_22.a import draw_map, compute_score, my_map
+from day_22.Map import Map
+from day_22.Person import Person
+from day_22.a import compute_score
 
 
 class TestDay22(unittest.TestCase):
@@ -21,13 +22,9 @@ class TestDay22(unittest.TestCase):
 
 10R5L5R10L4R5L5"""
 
-        instruction, max_x, max_y = draw_map(data)
-        me = Me(my_map, max_x, max_y)
-        me.move_by_instructions(instruction)
+        my_map = Map(data)
 
-        ans = compute_score(me.position, me.facing)
-
-        self.assertEqual(ans, 6032)
+        self.assertEqual(0, 6032)
 
     def test_part_a_sample_2(self):
         data = """        ...#
@@ -46,7 +43,7 @@ class TestDay22(unittest.TestCase):
 10R5L5R10L4R5L50LL1L2L3R2L2R50"""
 
         instruction, max_x, max_y = draw_map(data)
-        me = Me(my_map, max_x, max_y)
+        me = Person(my_map, max_x, max_y)
         me.move_by_instructions(instruction)
 
         ans = compute_score(me.position, me.facing)
