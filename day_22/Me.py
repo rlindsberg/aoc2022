@@ -32,13 +32,13 @@ class Me:
                 #     self.facing = Facing.WEST
                 # elif self.facing == Facing.WEST:
                 #     self.facing = Facing.NORTH
-                next_facing_np = _right_90_np @ self.position
+                next_facing_np = _right_90_np @ facing_to_np_map[self.facing]
 
                 # update robot direction
                 self.facing = get_key_facing_to_np_map(next_facing_np)
 
             elif inst == 'L':
-                next_facing_np = _left_90_np @ self.position
+                next_facing_np = _left_90_np @ facing_to_np_map[self.facing]
 
                 # update robot direction
                 self.facing = get_key_facing_to_np_map(next_facing_np)
