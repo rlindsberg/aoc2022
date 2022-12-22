@@ -17,11 +17,16 @@ class SquareType(Enum):
     EMPTY = auto()
 
 
-facing_to_np_map = {Facing.NORTH: np.array([0, 1]),
-                    Facing.EAST: np.array([1, 0]),
-                    Facing.SOUTH: np.array([0, -1]),
-                    Facing.WEST: np.array([-1, 0])}
+facing_to_np_map = {Facing.NORTH: np.array([-1, 0]),
+                    Facing.EAST: np.array([0, 1]),
+                    Facing.SOUTH: np.array([1, 0]),
+                    Facing.WEST: np.array([0, -1])}
 
+
+# facing_to_np_map = {Facing.NORTH: np.array([0, 1]),
+#                     Facing.EAST: np.array([1, 0]),
+#                     Facing.SOUTH: np.array([0, -1]),
+#                     Facing.WEST: np.array([-1, 0])}
 
 def get_key_facing_to_np_map(next_direction_np) -> Facing or None:
     """
