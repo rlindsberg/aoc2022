@@ -70,3 +70,4 @@ def check_boundary(func):
         # wrap around
         else:
             raise ValueError('Out of map exception')
+    return my_wrapper
