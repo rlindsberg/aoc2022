@@ -4,11 +4,12 @@ from enum import Enum, auto
 import numpy as np
 
 
+# Facing is 0 for right (>), 1 for down (v), 2 for left (<), and 3 for up (^).
 class Facing(Enum):
-    NORTH = auto()
-    EAST = auto()
-    SOUTH = auto()
-    WEST = auto()
+    NORTH = 3
+    EAST = 0
+    SOUTH = 1
+    WEST = 2
 
 
 class SquareType(Enum):

@@ -80,11 +80,13 @@ class Me:
         self.position += facing_to_np_map[self.facing]
 
     def move(self, n_steps):
+        if n_steps == 8 and self.facing == Facing.WEST:
+            # position is 189,1
+            print('now')
         for i in range(n_steps):
             try:
                 self.move_one_step()
             except ValueError:
                 # do wrap around
-                print(self.map_)
                 next_x, next_y = self.compute_wrap_around_x_y()
                 self.position = np.array([next_x, next_y])

@@ -35,6 +35,16 @@ def draw_map(data):
                 my_map[(row_idx, column_idx)] = SquareType.WALL
 
 
+def compute_score(position_list, facing) -> int:
+    x = position_list[0]
+    y = position_list[1]
+    facing_value = facing.value
+
+    # The final password is the sum of 1000 times the row, 4 times the column, and the facing.
+    score = 1000 * x + 4 * y + facing_value
+
+    return score
+
 
 def main():
     day, part = get_day_and_part(__file__)
@@ -46,7 +56,8 @@ def main():
     instruction, max_x, max_y = draw_map(data)
     me = Me(my_map, max_x, max_y)
     me.move_by_instructions(instruction)
-    ans = 0
+
+    ans = compute_score(me.position, me.facing)
 
     # submit
     submit_answer(ans, day, part)
