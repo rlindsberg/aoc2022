@@ -49,30 +49,26 @@ def check_boundary(func):
     # this preserves the function identity of func.
     @functools.wraps(func)
     def my_wrapper(*args, **kwargs):
-        map_ = args[0].map_
-        current_position = args[0].position
-        current_facing = args[0].facing
+        me = args[0]
+        my_map = me.my_map
 
-        max_coordinate_x = args[0].max_x
-        max_coordinate_y = args[0].max_y
+        current_position = me.position
+        current_facing = me.facing
 
         try_next_position = current_position + facing_to_np_map[current_facing]
 
         # wrap around if this fails (raise exception)
-        try:
-            if map_[(try_next_position[0], try_next_position[1])] == SquareType.EMPTY:
-                raise ValueError('Out of map exception')
-        except KeyError:
+        if my_map.map_array[try_next_position[0]][try_next_position[1]] == -1:
+            # next is an empty space
             raise ValueError('Out of map exception')
 
         # wall
-        if map_[(try_next_position[0], try_next_position[1])] == SquareType.WALL:
+        if my_map.map_array[try_next_position[0]][try_next_position[1]] == 1:
             print('cannot move into wall')
             return
 
         # ok
-        if 1 <= try_next_position[0] <= max_coordinate_x and 1 <= try_next_position[1] <= max_coordinate_y:
-            # do move one step
-            func(*args, **kwargs)
+        # do move one step
+        func(*args, **kwargs)
 
     return my_wrapper

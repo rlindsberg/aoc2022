@@ -2,6 +2,12 @@ import numpy as np
 
 
 class Map:
+    """
+    This class represents the Grove map and consists of:
+        a map_array: the np.ndarray representation of the map
+        max_x and max_y: the map boundary (zero-indexed)
+        two dictionaries to store the start and end non-empty place
+    """
     def __init__(self, data):
         self.map_array, self.max_x, self.max_y = self.build_map(data)
 
@@ -10,6 +16,7 @@ class Map:
         self.compute_start_end_for_each_row()
 
     def compute_start_end_for_each_row(self):
+        """Part of the init function"""
         m, n = self.map_array.shape
 
         for row_idx in range(m):
@@ -34,7 +41,6 @@ class Map:
             assert start <= end
 
             self.get_start_end_by_row[row_idx] = (start, end)
-            print('')
 
         for col_idx in range(n):
             start, end = None, None
@@ -55,13 +61,11 @@ class Map:
                     end = row_idx
                     break
 
-            assert start <= end
-
             self.get_start_end_by_column[col_idx] = (start, end)
-            print('')
 
     @staticmethod
     def build_map(data):
+        """The main function for building a ndarray representation of the input data"""
         input_list = data.split("\n")
         max_x = 0,
         max_y = 0
