@@ -3,12 +3,12 @@ from aocd.models import Puzzle
 from helpers import get_day_and_part, submit_answer
 
 
-def find_start_of_packet_marker_index(data):
+def find_start_of_packet_marker_index(data, n_distinct_chars=4):
     for i in range(len(data) - 3):
-        sub_str = data[i:i+4]
+        sub_str = data[i:i + n_distinct_chars]
 
-        if len(set(sub_str)) == 4:
-            return i + 4
+        if len(set(sub_str)) == n_distinct_chars:
+            return i + n_distinct_chars
 
     return 0
 
