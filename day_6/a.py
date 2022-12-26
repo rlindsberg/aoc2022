@@ -21,7 +21,7 @@ def main():
 
     ans = find_start_of_packet_marker_index(data)
 
-    # submit_answer(ans, day, part)
+    submit_answer(ans, day, part)
 
 
 if __name__ == '__main__':
