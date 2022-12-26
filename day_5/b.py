@@ -15,9 +15,18 @@ def move_crates(data):
         source = int(inst_list[3])
         dest = int(inst_list[-1])
 
-        # move
-        raise NotImplemented
-    
+        # move from source
+        temp_stack = []
+        for i in range(n_move_per_inst):
+            crate_to_move = stacks[source].get()
+
+            # lifo queue with list
+            temp_stack.insert(0, crate_to_move)
+
+        # move to destination
+        for crate in temp_stack:
+            stacks[dest].put(crate)
+
     return stacks
 
 
