@@ -16,11 +16,14 @@ def sum_all_sub_folder_sizes(data, at_most):
 
     sum_ = 0
     print('sum')
-    for k, v in finder.inode_name_to_obj_map.items():
+    for k, v in finder.folder_name_to_obj_map.items():
         if type(v) == Folder:
             my_folder: Folder = v
             if my_folder.name != '/':
-                sum_ += my_folder.size
+
+                # sum
+                if my_folder.size <= at_most:
+                    sum_ += my_folder.size
 
     return sum_
 
@@ -31,7 +34,7 @@ def main():
     data = get_input_data(day)
 
     # solution
-    ans = sum_all_sub_folder_sizes(data)
+    ans = sum_all_sub_folder_sizes(data, at_most=100000)
 
     # submit
     # submit_answer(ans, day, part)
