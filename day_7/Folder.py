@@ -15,4 +15,4 @@ class Folder:
 
         if self.name != '/':
             # roots parent is None
-            self.parent.size += size_to_add
+            self.parent.update_file_sizes(size_to_add)
