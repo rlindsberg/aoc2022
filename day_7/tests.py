@@ -16,6 +16,17 @@ class TestDay7(unittest.TestCase):
         self.assertEqual(res.size, 5)
         self.assertEqual(res.name, 'file2-a')
 
+    def test_parse_dir(self):
+        dir_str = 'dir a'
+
+        finder = Finder()
+
+        res = finder.parse_dir('/', dir_str)
+
+        self.assertEqual(res.parent.name, '/')
+        self.assertEqual(res.name, 'a')
+
+
     def test_part_a(self):
 
         data = """
