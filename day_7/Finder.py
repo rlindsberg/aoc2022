@@ -26,8 +26,11 @@ class Finder:
         root_dir = Folder('/', None)
         self.dir_dict['/'] = root_dir
 
-    def parse_dir(self, parent_path: str, raw_dir: str):
-        raw_dir_list = raw_dir.split(' ')
+    def parse_dir(self, parent_path: str, raw_command: str):
+        """
+        Parse raw command like "dir abc" and returns a Folder
+        """
+        raw_dir_list = raw_command.split(' ')
         dir_name = raw_dir_list[1]
 
         parent = self.dir_dict[parent_path]
@@ -89,6 +92,26 @@ class Finder:
             print(f'Current path is {self.current_path}')
 
         elif cmd_type == 'ls':
+            res = arg_or_res
+
+            # parse all file and sub-dirs inside a dir
+            for raw_command in res:
+                # item can be a file or dir
+                if raw_command[:3] == 'dir':
+                    new_dir: Folder = self.parse_dir(parent_path=self.current_path, raw_command=raw_command)
+
+                    if new_dir.name not in self.dir_dict.keys():
+                        # index this dir
+                        self.dir_dict[new_dir.name] = new_dir
+
+                        # tell its parent that this dir exists
+                        current_dir: Folder = self.dir_dict[self.current_path]
+                        current_dir.children.append(new_dir)
+
+                else:
+                    # this is a file
+                    print('')
+                    pass
             print('ls')
 
         else:
