@@ -129,7 +129,7 @@ class Finder:
                         self.file_name_to_obj_map[new_file.name] = new_file
 
                         current_dir: Folder = self.folder_name_to_obj_map[self.current_path]
-                        current_dir.size += new_file.size
+                        current_dir.update_file_sizes(new_file.size)
                         current_dir.children.append(new_file)
 
             print('ls')
