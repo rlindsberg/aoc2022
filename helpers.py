@@ -1,6 +1,7 @@
 """ This file collects some helper functions for solving puzzles.
 """
 from aocd import submit
+from aocd.models import Puzzle
 
 
 def get_day_and_part(file_name: str) -> (int, str):
@@ -12,6 +13,14 @@ def get_day_and_part(file_name: str) -> (int, str):
     return int(day), part
 
 
+def get_input_data(day: str):
+    """Get input data from adventofcode.com"""
+    puzzle = Puzzle(year=2022, day=day)
+
+    return puzzle.input_data
+
+
 def submit_answer(my_answer, day: int, part: str):
+    """Submit your answer to adventofcode.com"""
     res = submit(my_answer, part=part, day=day, year=2022)
     print(res)
