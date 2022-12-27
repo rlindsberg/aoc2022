@@ -7,7 +7,7 @@ class Finder:
     def __init__(self):
         self.parent_path = '/'
         self.current_path = '/'
-        self.depth = 0
+        self.trajectory = []
 
         self.dir_dict = {}
         self.index_root()
@@ -66,7 +66,21 @@ class Finder:
         cmd_type, arg_or_res = self.parse_raw_cmd_input(cmd_str)
 
         if cmd_type == 'cd':
-            print('cd')
+            target = arg_or_res
+            if target == '/':
+                # special case
+                self.parent_path = '/'
+                self.current_path = '/'
+                self.trajectory = ['/']
+
+            elif target != '..':
+                # go in a step
+                self.trajectory.append(target)
+                self.parent_path = self.current_path
+                self.current_path = target
+
+            print(cmd_str)
+            print(f'Current path is {self.current_path}')
 
         elif cmd_type == 'ls':
             print('ls')
