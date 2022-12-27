@@ -14,7 +14,15 @@ def sum_all_sub_folder_sizes(data, at_most):
 
         finder.exec_cmd(cmd_str)
 
-    return 0
+    sum_ = 0
+    print('sum')
+    for k, v in finder.inode_name_to_obj_map.items():
+        if type(v) == Folder:
+            my_folder: Folder = v
+            if my_folder.name != '/':
+                sum_ += my_folder.size
+
+    return sum_
 
 
 def main():
