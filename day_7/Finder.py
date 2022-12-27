@@ -25,3 +25,11 @@ class Finder:
     def index_root(self):
         root_dir = Folder('/', None)
         self.dir_dict['/'] = root_dir
+
+    def parse_dir(self, parent_path: str, raw_dir: str):
+        raw_dir_list = raw_dir.split(' ')
+        dir_name = raw_dir_list[1]
+
+        parent = self.dir_dict[parent_path]
+
+        return Folder(dir_name, parent)
