@@ -135,7 +135,7 @@ $ ls
 dir a
 14848514 b.txt
 8504156 c.dat
-dir a
+dir d
 $ cd a
 $ ls
 dir e

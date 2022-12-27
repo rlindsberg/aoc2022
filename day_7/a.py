@@ -31,10 +31,11 @@ def main():
     data = get_input_data(day)
 
     # solution
-    ans = sum_all_sub_folder_sizes(data, at_most=100000)
+    finder = Finder()
+    ans = sum_all_sub_folder_sizes(finder, data, at_most=100000)
 
     # submit
-    # submit_answer(ans, day, part)
+    submit_answer(ans, day, part)
 
 
 if __name__ == '__main__':

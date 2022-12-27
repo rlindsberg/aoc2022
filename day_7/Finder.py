@@ -17,7 +17,9 @@ class Finder:
     def parse_file(self, parent_path: str, raw_command: str):
         raw_file_list = raw_command.split(' ')
         file_size = int(raw_file_list[0])
-        file_name = raw_file_list[1]
+
+        # file is identified by its full path with a trailing slash
+        file_name = parent_path + raw_file_list[1]
 
         parent = self.folder_name_to_obj_map[parent_path]
         file = File(file_name, file_size, parent)
@@ -33,7 +35,9 @@ class Finder:
         Parse raw command like "dir abc" and returns a Folder
         """
         raw_dir_list = raw_command.split(' ')
-        dir_name = raw_dir_list[1]
+
+        # identified by its full path with a trailing slash
+        dir_name = parent_path + raw_dir_list[1]
 
         parent = self.folder_name_to_obj_map[parent_path]
 
@@ -50,12 +54,17 @@ class Finder:
             cmd_type = cmd[:2]
             argument = target_dir
 
+            # add trailing slash to cd target
+            if argument != '/':
+                argument = argument + '/'
             return cmd_type, argument
 
         elif cmd[:2] == 'ls':
             cmd_type = cmd[:2]
 
-            return cmd_type, res
+            # add trailing slash to ls responses
+            res_with_trailing_slash = [inode + '/' for inode in res if inode != '']
+            return cmd_type, res_with_trailing_slash
             # for item in res:
             #     # item can be file or dir
             #     if item[:3] == 'dir':
@@ -78,7 +87,7 @@ class Finder:
                 self.current_path = '/'
                 self.trajectory = ['/']
 
-            elif target == '..':
+            elif target == '../':
                 # special case
                 if len(self.trajectory) == 1:
                     print(self.trajectory)
@@ -88,14 +97,15 @@ class Finder:
                     return
 
                 self.current_path = self.parent_path
-                self.parent_path = self.trajectory[-2]
+                # join list into a string
+                self.parent_path = "".join([str(item) for item in self.trajectory[:-2]])
                 self.trajectory = self.trajectory[:-1]
 
             else:
                 # go in a step
                 self.trajectory.append(target)
                 self.parent_path = self.current_path
-                self.current_path = target
+                self.current_path = self.current_path + target
 
             print(cmd_str)
             print(f'Current path is {self.current_path}')
