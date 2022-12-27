@@ -78,9 +78,16 @@ class Finder:
 
             elif target == '..':
                 # special case
+                if len(self.trajectory) == 1:
+                    print(self.trajectory)
+                    print(self.parent_path)
+                    assert self.parent_path == '/'
+                    assert self.current_path == '/'
+                    return
+
                 self.current_path = self.parent_path
                 self.parent_path = self.trajectory[-2]
-                self.trajectory = self.trajectory[:-2]
+                self.trajectory = self.trajectory[:-1]
 
             else:
                 # go in a step
