@@ -9,7 +9,7 @@ class Finder:
         self.current_path = '/'
         self.trajectory = []
 
-        self.dir_dict = {}
+        self.inode_name_to_obj_map = {}
         self.index_root()
 
     def parse_file(self, parent_path: str, raw_file: str):
@@ -17,14 +17,14 @@ class Finder:
         file_size = int(raw_file_list[0])
         file_name = raw_file_list[1]
 
-        parent = self.dir_dict[parent_path]
+        parent = self.inode_name_to_obj_map[parent_path]
         file = File(file_name, file_size, parent)
 
         return file
 
     def index_root(self):
         root_dir = Folder('/', None)
-        self.dir_dict['/'] = root_dir
+        self.inode_name_to_obj_map['/'] = root_dir
 
     def parse_dir(self, parent_path: str, raw_command: str):
         """
@@ -33,7 +33,7 @@ class Finder:
         raw_dir_list = raw_command.split(' ')
         dir_name = raw_dir_list[1]
 
-        parent = self.dir_dict[parent_path]
+        parent = self.inode_name_to_obj_map[parent_path]
 
         return Folder(dir_name, parent)
 
@@ -100,12 +100,12 @@ class Finder:
                 if raw_command[:3] == 'dir':
                     new_dir: Folder = self.parse_dir(parent_path=self.current_path, raw_command=raw_command)
 
-                    if new_dir.name not in self.dir_dict.keys():
+                    if new_dir.name not in self.inode_name_to_obj_map.keys():
                         # index this dir
-                        self.dir_dict[new_dir.name] = new_dir
+                        self.inode_name_to_obj_map[new_dir.name] = new_dir
 
                         # tell its parent that this dir exists
-                        current_dir: Folder = self.dir_dict[self.current_path]
+                        current_dir: Folder = self.inode_name_to_obj_map[self.current_path]
                         current_dir.children.append(new_dir)
 
                 else:
