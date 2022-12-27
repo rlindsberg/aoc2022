@@ -108,6 +108,10 @@ class Finder:
                         current_dir: Folder = self.inode_name_to_obj_map[self.current_path]
                         current_dir.children.append(new_dir)
 
+                elif raw_command[:3] == '':
+                    # end of the command
+                    return
+
                 else:
                     # this is a file
                     new_file: File = self.parse_file(parent_path=self.current_path, raw_command=raw_command)
