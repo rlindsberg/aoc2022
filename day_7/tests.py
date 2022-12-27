@@ -126,3 +126,38 @@ $ ls
 
         self.assertEqual(ans, 95437)
         self.assertEqual(finder.folder_name_to_obj_map['/'].size, 48381165)
+
+    def test_part_a_example_same_sub_folder_name_as_parent(self):
+        """Use the first few lines of the input data, change a sub-folder's name to its parent's"""
+        data = """
+$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir a
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k"""
+
+        print(data)
+
+        finder = Finder()
+        ans = sum_all_sub_folder_sizes(finder, data, at_most=100000)
+
+        self.assertEqual(ans, 95437)
+        self.assertEqual(finder.folder_name_to_obj_map['/'].size, 48381165)
