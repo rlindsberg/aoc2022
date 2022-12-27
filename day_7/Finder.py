@@ -73,7 +73,13 @@ class Finder:
                 self.current_path = '/'
                 self.trajectory = ['/']
 
-            elif target != '..':
+            elif target == '..':
+                # special case
+                self.current_path = self.parent_path
+                self.parent_path = self.trajectory[-2]
+                self.trajectory = self.trajectory[:-2]
+
+            else:
                 # go in a step
                 self.trajectory.append(target)
                 self.parent_path = self.current_path
