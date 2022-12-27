@@ -6,3 +6,4 @@ class File:
         self.name = name
         self.size = size
         self.parent = parent
+        self.is_indexed = False
