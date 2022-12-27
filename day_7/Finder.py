@@ -1,6 +1,9 @@
 from day_7.File import File
 from day_7.Folder import Folder
 
+TOTAL_DISK_SPACE = 70000000
+LEAST_FREE_SPACE = 30000000
+
 
 class Finder:
     """Or you can call it File Explorer"""
@@ -146,3 +149,21 @@ class Finder:
 
         else:
             raise Exception('cmd is not valid')
+
+    def find_which_dir_to_delete(self):
+        # compute space_needed
+        size_of_root = self.folder_name_to_obj_map['/'].size
+        current_free_space = TOTAL_DISK_SPACE - size_of_root
+        space_needed = LEAST_FREE_SPACE - current_free_space
+
+        sizes = []
+        for k, v in self.folder_name_to_obj_map.items():
+            folder: Folder = v
+            sizes.append(folder.size)
+
+        # from smallest to largest
+        sizes.sort()
+
+        for size in sizes:
+            if size > space_needed:
+                return size
