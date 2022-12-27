@@ -12,8 +12,8 @@ class Finder:
         self.inode_name_to_obj_map = {}
         self.index_root()
 
-    def parse_file(self, parent_path: str, raw_file: str):
-        raw_file_list = raw_file.split(' ')
+    def parse_file(self, parent_path: str, raw_command: str):
+        raw_file_list = raw_command.split(' ')
         file_size = int(raw_file_list[0])
         file_name = raw_file_list[1]
 
@@ -110,8 +110,15 @@ class Finder:
 
                 else:
                     # this is a file
-                    print('')
-                    pass
+                    new_file: File = self.parse_file(parent_path=self.current_path, raw_command=raw_command)
+
+                    if new_file.name not in self.inode_name_to_obj_map.keys():
+                        self.inode_name_to_obj_map[new_file.name] = new_file
+
+                        current_dir: Folder = self.inode_name_to_obj_map[self.current_path]
+                        current_dir.size += new_file.size
+                        current_dir.children.append(new_file)
+
             print('ls')
 
         else:
