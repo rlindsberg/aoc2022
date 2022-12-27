@@ -64,3 +64,12 @@ class Finder:
     def exec_cmd(self, cmd_str):
         # cd, arg or ls, response
         cmd_type, arg_or_res = self.parse_raw_cmd_input(cmd_str)
+
+        if cmd_type == 'cd':
+            print('cd')
+
+        elif cmd_type == 'ls':
+            print('ls')
+
+        else:
+            raise Exception('cmd is not valid')
