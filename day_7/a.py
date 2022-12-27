@@ -3,11 +3,8 @@ from day_7.Folder import Folder
 from helpers import get_day_and_part, submit_answer, get_input_data
 
 
-def sum_all_sub_folder_sizes(data, at_most):
+def sum_all_sub_folder_sizes(finder, data, at_most):
     input_list = data.split("$ ")[1:]
-
-    # some preparation
-    finder = Finder()
 
     # parse input and build dir map
     for cmd_str in input_list:

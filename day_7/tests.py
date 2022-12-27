@@ -53,7 +53,8 @@ $ ls
         """
         print(data)
 
-        ans = sum_all_sub_folder_sizes(data, at_most=100000)
+        finder = Finder()
+        ans = sum_all_sub_folder_sizes(finder, data, at_most=100000)
 
         self.assertEqual(ans, 12)
 
@@ -86,7 +87,8 @@ $ ls
         """
         print(data)
 
-        ans = sum_all_sub_folder_sizes(data, at_most=100000)
+        finder = Finder()
+        ans = sum_all_sub_folder_sizes(finder, data, at_most=100000)
 
         self.assertEqual(ans, 12)
 
@@ -119,6 +121,8 @@ $ ls
 
         print(data)
 
-        ans = sum_all_sub_folder_sizes(data, at_most=100000)
+        finder = Finder()
+        ans = sum_all_sub_folder_sizes(finder, data, at_most=100000)
 
         self.assertEqual(ans, 95437)
+        self.assertEqual(finder.folder_name_to_obj_map['/'].size, 48381165)
