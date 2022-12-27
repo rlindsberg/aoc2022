@@ -9,7 +9,9 @@ class Finder:
         self.current_path = '/'
         self.trajectory = []
 
-        self.inode_name_to_obj_map = {}
+        self.folder_name_to_obj_map = {}
+        self.file_name_to_obj_map = {}
+
         self.index_root()
 
     def parse_file(self, parent_path: str, raw_command: str):
@@ -17,14 +19,14 @@ class Finder:
         file_size = int(raw_file_list[0])
         file_name = raw_file_list[1]
 
-        parent = self.inode_name_to_obj_map[parent_path]
+        parent = self.folder_name_to_obj_map[parent_path]
         file = File(file_name, file_size, parent)
 
         return file
 
     def index_root(self):
         root_dir = Folder('/', None)
-        self.inode_name_to_obj_map['/'] = root_dir
+        self.folder_name_to_obj_map['/'] = root_dir
 
     def parse_dir(self, parent_path: str, raw_command: str):
         """
@@ -33,7 +35,7 @@ class Finder:
         raw_dir_list = raw_command.split(' ')
         dir_name = raw_dir_list[1]
 
-        parent = self.inode_name_to_obj_map[parent_path]
+        parent = self.folder_name_to_obj_map[parent_path]
 
         return Folder(dir_name, parent)
 
@@ -107,12 +109,12 @@ class Finder:
                 if raw_command[:3] == 'dir':
                     new_dir: Folder = self.parse_dir(parent_path=self.current_path, raw_command=raw_command)
 
-                    if new_dir.name not in self.inode_name_to_obj_map.keys():
+                    if new_dir.name not in self.folder_name_to_obj_map.keys():
                         # index this dir
-                        self.inode_name_to_obj_map[new_dir.name] = new_dir
+                        self.folder_name_to_obj_map[new_dir.name] = new_dir
 
                         # tell its parent that this dir exists
-                        current_dir: Folder = self.inode_name_to_obj_map[self.current_path]
+                        current_dir: Folder = self.folder_name_to_obj_map[self.current_path]
                         current_dir.children.append(new_dir)
 
                 elif raw_command[:3] == '':
@@ -123,10 +125,10 @@ class Finder:
                     # this is a file
                     new_file: File = self.parse_file(parent_path=self.current_path, raw_command=raw_command)
 
-                    if new_file.name not in self.inode_name_to_obj_map.keys():
-                        self.inode_name_to_obj_map[new_file.name] = new_file
+                    if new_file.name not in self.file_name_to_obj_map.keys():
+                        self.file_name_to_obj_map[new_file.name] = new_file
 
-                        current_dir: Folder = self.inode_name_to_obj_map[self.current_path]
+                        current_dir: Folder = self.folder_name_to_obj_map[self.current_path]
                         current_dir.size += new_file.size
                         current_dir.children.append(new_file)
 
