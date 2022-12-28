@@ -20,6 +20,17 @@ class CPU:
             # print(self.register)
             self.sum_signal_strength += self.counter * self.register
 
+        # CRT draw
+        if self.counter % 41 == 0:
+            print('')
+            self.counter = 1
+        # self.counter - 1 because CRT draws at position 0 at cycle 1
+        if self.register - 1 <= self.counter - 1 <= self.register + 1:
+            # draw lit pixel
+            print('#', end='')
+        else:
+            print(' ', end='')
+
         if raw_input == 'noop':
             # noop has no effect
             pass
