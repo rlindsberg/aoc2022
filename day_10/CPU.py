@@ -7,6 +7,8 @@ class CPU:
         # addx takes two cycles
         self.addx_timer = 1
 
+        self.sum_signal_strength = 0
+
     def parse_and_exec_cmd(self, raw_input: str):
         # the start of a new cycle
         self.counter += 1
@@ -16,6 +18,7 @@ class CPU:
         if self.counter in [20, 60, 100, 140, 180, 220]:
             print('time to measure signal strength!')
             print(self.register)
+            self.sum_signal_strength += self.counter * self.register
 
         if raw_input == 'noop':
             # noop has no effect

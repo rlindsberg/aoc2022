@@ -167,3 +167,6 @@ noop"""
 
         cpu = CPU()
         _ = parse_and_exec_cmd(data, cpu)
+
+        self.assertEqual(cpu.sum_signal_strength, 13140)
+        
