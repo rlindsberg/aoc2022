@@ -42,7 +42,7 @@ def main():
     ans = count_visible_trees(data)
 
     # submit
-    # submit_answer(ans, day, part)
+    submit_answer(ans, day, part)
 
 
 if __name__ == '__main__':
