@@ -18,10 +18,10 @@ def main():
 
     # solution
     cpu = CPU()
-    ans = parse_and_exec_cmd(data, cpu)
+    parse_and_exec_cmd(data, cpu)
 
     # submit
-    # submit_answer(ans, day, part)
+    submit_answer(cpu.sum_signal_strength, day, part)
 
 
 if __name__ == '__main__':
