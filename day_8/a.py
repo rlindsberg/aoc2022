@@ -14,11 +14,15 @@ def count_visible_trees(data):
         for x in range(1, len(tree_array) - 1):
             tree = tree_array[y][x]
 
-            north = tree_array[y - 1][x]
-            south = tree_array[y + 1][x]
-            east = tree_array[y][x + 1]
-            west = tree_array[y][x - 1]
+            north_trees = tree_array[:y, x]
+            south_trees = tree_array[y + 1:, x]
+            east_trees = tree_array[y, x + 1:]
+            west_trees = tree_array[y, :x]
 
+            north = max(north_trees)
+            south = max(south_trees)
+            east = max(east_trees)
+            west = max(west_trees)
             if tree <= min(north, east, south, west):
                 print('potential tree')
                 pass
