@@ -69,6 +69,7 @@ Monkey 3:
             while len(monkey.item_list) != 0:
                 # Monkey inspects an item with a worry level of 79.
                 item = monkey.item_list.pop(0)
+                monkey.n_inspection += 1
 
                 # Worry level is multiplied by 19 to 1501.
                 old = item

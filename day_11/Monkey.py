@@ -9,6 +9,7 @@ class Monkey:
         self.test_func = test_func
         self.next_monkey_if_true = next_monkey_if_true
         self.next_monkey_if_false = next_monkey_if_false
+        self.n_inspection = 0
 
     def test(self, item_worry_level):
         new = item_worry_level
