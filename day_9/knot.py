@@ -36,19 +36,19 @@ class Knot:
     def follow(self, h: Knot):
         # if distance is too far, then the tail will follow the head
 
+        d_x = h.x - self.x
+        d_y = h.y - self.y
         # case 1, diagonal
-        if h.y - self.y == 2 and h.x - self.x == 1:
-            self.move('R')
-            self.move('U')
-        elif h.y - self.y == 2 and h.x - self.x == -1:
-            self.move('L')
-            self.move('U')
-        elif h.y - self.y == -2 and h.x - self.x == -1:
-            self.move('L')
-            self.move('D')
-        elif h.y - self.y == -2 and h.x - self.x == 1:
-            self.move('R')
-            self.move('D')
+        if sqrt(d_x ** 2 + d_y ** 2) == sqrt(5):
+            if d_x >= 0:
+                self.move('R')
+            else:
+                self.move('L')
+
+            if d_y >= 0:
+                self.move('U')
+            else:
+                self.move('D')
 
         # case 2 horizontal
         if h.x - self.x == 2:
