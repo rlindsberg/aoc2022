@@ -2,10 +2,8 @@ from day_9.knot import Knot
 from helpers import get_day_and_part, submit_answer, get_input_data
 
 
-def move_head_tail_according_to_input(data):
+def move_head_tail_according_to_input(data, head, tail):
     """Simulate your complete hypothetical series of motions"""
-    head = Knot()
-    tail = Knot()
 
     input_list = data.split("\n")
     for input_ in input_list:
