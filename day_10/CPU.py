@@ -12,12 +12,12 @@ class CPU:
     def parse_and_exec_cmd(self, raw_input: str):
         # the start of a new cycle
         self.counter += 1
-        print(f'Start of cycle {self.counter}')
+        # print(f'Start of cycle {self.counter}')
 
         # now we are in the middle of a cycle
         if self.counter in [20, 60, 100, 140, 180, 220]:
-            print('time to measure signal strength!')
-            print(self.register)
+            # print('time to measure signal strength!')
+            # print(self.register)
             self.sum_signal_strength += self.counter * self.register
 
         if raw_input == 'noop':
@@ -43,4 +43,4 @@ class CPU:
                     self.addx_timer -= 1
                     self.parse_and_exec_cmd(raw_input)
 
-        print(f'End of cycle {self.counter}')
+        # print(f'End of cycle {self.counter}')
