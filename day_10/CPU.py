@@ -15,6 +15,7 @@ class CPU:
         # now we are in the middle of a cycle
         if self.counter in [20, 60, 100, 140, 180, 220]:
             print('time to measure signal strength!')
+            print(self.register)
 
         if raw_input == 'noop':
             # noop has no effect
@@ -31,7 +32,7 @@ class CPU:
             if op == 'addx':
                 if self.addx_timer == 0:
                     # reset timer
-                    self.addx_timer = 2
+                    self.addx_timer = 1
 
                     # at the end of a cycle
                     self.register += int(arg)
