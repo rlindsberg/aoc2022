@@ -7,6 +7,7 @@ class Knot:
     def __init__(self):
         self.x = 0
         self.y = 0
+        self.visited_positions = {}
 
     def move(self, direction):
         # move up
@@ -65,3 +66,6 @@ class Knot:
         d_x = h.x - self.x
         d_y = h.y - self.y
         assert sqrt(d_x ** 2 + d_y ** 2) <= sqrt(2)
+
+    def register_visited_position(self):
+        self.visited_positions[(self.x, self.y)] = 1

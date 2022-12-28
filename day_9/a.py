@@ -2,7 +2,7 @@ from day_9.knot import Knot
 from helpers import get_day_and_part, submit_answer, get_input_data
 
 
-def move_head_tail_according_to_input(data, head, tail):
+def move_head_tail_and_compute_n_visited_pos(data, head, tail):
     """Simulate your complete hypothetical series of motions"""
 
     input_list = data.split("\n")
@@ -15,7 +15,9 @@ def move_head_tail_according_to_input(data, head, tail):
 
             tail.follow(head)
 
-    return 0
+            tail.register_visited_position()
+
+    return len(tail.visited_positions)
 
 
 def main():
@@ -24,7 +26,10 @@ def main():
     data = get_input_data(day)
 
     # solution
-    ans = move_head_tail_according_to_input(data)
+    head = Knot()
+    tail = Knot()
+
+    ans = move_head_tail_and_compute_n_visited_pos(data, head, tail)
 
     # submit
     # submit_answer(ans, day, part)
