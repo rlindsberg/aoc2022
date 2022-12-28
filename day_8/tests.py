@@ -1,12 +1,10 @@
 import unittest
 
-from day_7.Finder import Finder
-from day_7.a import sum_all_sub_folder_sizes
 from day_8.a import count_visible_trees
 from day_8.b import compute_scenic_score
 
 
-class TestDay7(unittest.TestCase):
+class TestDay8(unittest.TestCase):
 
     def test_part_a(self):
         data = """30373
