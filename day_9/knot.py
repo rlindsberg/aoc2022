@@ -7,7 +7,7 @@ class Knot:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.visited_positions = {}
+        self.visited_positions = {(0, 0): 1}
 
     def move(self, direction):
         # move up
@@ -21,18 +21,12 @@ class Knot:
         # down
         elif direction == 'D':
             next_y = self.y - 1
-            if next_y >= 0:
-                self.y = next_y
-            else:
-                print('cannot move down')
+            self.y = next_y
 
         # left
         elif direction == 'L':
             next_x = self.x - 1
-            if next_x >= 0:
-                self.x = next_x
-            else:
-                print('cannot move left')
+            self.x = next_x
 
     def follow(self, h: Knot):
         # if distance is too far, then the tail will follow the head
