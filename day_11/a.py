@@ -30,36 +30,9 @@ def parse_input_and_create_monkeys(data) -> list:
 
 def main():
     # get input data
-    # day, part = get_day_and_part(__file__)
-    # data = get_input_data(day)
+    day, part = get_day_and_part(__file__)
+    data = get_input_data(day)
 
-    data = """Monkey 0:
-  Starting items: 79, 98
-  Operation: new = old * 19
-  Test: divisible by 23
-    If true: throw to monkey 2
-    If false: throw to monkey 3
-
-Monkey 1:
-  Starting items: 54, 65, 75, 74
-  Operation: new = old + 6
-  Test: divisible by 19
-    If true: throw to monkey 2
-    If false: throw to monkey 0
-
-Monkey 2:
-  Starting items: 79, 60, 97
-  Operation: new = old * old
-  Test: divisible by 13
-    If true: throw to monkey 1
-    If false: throw to monkey 3
-
-Monkey 3:
-  Starting items: 74
-  Operation: new = old + 3
-  Test: divisible by 17
-    If true: throw to monkey 0
-    If false: throw to monkey 1"""
     # solution
     monkey_list = parse_input_and_create_monkeys(data)
 
@@ -92,9 +65,14 @@ Monkey 3:
                 next_monkey.item_list.append(new)
                 print('')
 
+    # result
+    n_inspection_list = [m.n_inspection for m in monkey_list]
+    n_inspection_list.sort()
+
+    ans = n_inspection_list[-1] * n_inspection_list[-2]
+
     # submit
-    print('')
-    # submit_answer(ans, day, part)
+    submit_answer(ans, day, part)
 
 
 if __name__ == '__main__':
