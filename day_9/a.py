@@ -32,7 +32,7 @@ def main():
     ans = move_head_tail_and_compute_n_visited_pos(data, head, tail)
 
     # submit
-    # submit_answer(ans, day, part)
+    submit_answer(ans, day, part)
 
 
 if __name__ == '__main__':
