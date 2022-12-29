@@ -17,6 +17,13 @@ def build_map(data):
     return heightmap_np
 
 
+def find_destination(heightmap):
+    """Find the x y coordinates of the destination"""
+    res = np.where(heightmap == 'E')
+
+    return res[0][0], res[0][1]
+
+
 def main():
     # get input data
     # day, part = get_day_and_part(__file__)
@@ -30,6 +37,8 @@ abdefghi"""
 
     # solution
     heightmap = build_map(data)
+
+    dest_x_y = find_destination(heightmap)
 
     # submit
     # submit_answer(ans, day, part)
